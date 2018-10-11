@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tfFahrenheit: UITextField!
+    @IBOutlet weak var tfCelsius: UITextField!
+    
+    let converter = TemperatureConverter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,7 +26,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func convert(_ sender: UIButton) {
+        let gradosF = tfFahrenheit.text
+        if gradosF != nil {
+            let fahrenheit = gradosF!
+            let valorGF = Double(fahrenheit)
+            if let dF = valorGF {
+                converter.fahrenheit = dF
+                converter.convert()
+                let dC = converter.celsius
+                tfCelsius.text = "\(dC)"
+            }
+        }
     }
+    
+    
     
 }
 
